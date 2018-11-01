@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Mohamed Asif J
  */
 @RestController
-@RequestMapping(value = "/project")
+@RequestMapping(value = "api/project")
 public class ProjectController {
 
     @Autowired
