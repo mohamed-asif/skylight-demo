@@ -33,9 +33,9 @@ public class ProjectServiceImpl implements ProjectService {
     }
     
     @Override
-    public Project findProject(long id) {
-        Optional<Project> projects = projectRepository.findById(id);
-        return projects.get();
+    public  Optional<Project> findProject(long id) {
+
+        return projectRepository.findById(id);
     }
 
     @Override

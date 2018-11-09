@@ -1,11 +1,14 @@
 package com.kgisl.skylight.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.kgisl.skylight.model.Environment;
 import com.kgisl.skylight.service.EnvironmentService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Mohamed Asif J
  */
 @RestController
-@RequestMapping(value = "api/environment")
+@RequestMapping("/environment")
 public class EnvironmentController {
 
     @Autowired
@@ -33,14 +36,19 @@ public class EnvironmentController {
     }
 
     @GetMapping("/find/{id}")
-    public Environment retrieveEnvironment(@PathVariable long id) {
+    public ResponseEntity<Environment> retrieveEnvironment(@PathVariable long id) {
 
-        return environmentService.findEnvironment(id);
+        Optional<Environment> findedEnvironment = environmentService.findEnvironment(id);
+        
+        if(findedEnvironment.isPresent())
+            return new ResponseEntity<>(findedEnvironment.get(),HttpStatus.OK);
+        else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteEnvironment(@PathVariable long id) {
+    public ResponseEntity<String> deleteEnvironment(@PathVariable long id) {
         environmentService.deleteEnvironment(id);
+        return new ResponseEntity<>("Environment has been deleted!",HttpStatus.OK);
     }
 
     @PostMapping("/create")
