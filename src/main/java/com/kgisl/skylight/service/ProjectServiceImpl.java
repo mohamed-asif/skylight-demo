@@ -1,6 +1,5 @@
 package com.kgisl.skylight.service;
 
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,14 +26,11 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Project createProject(Project project) {
-        Timestamp time = new Timestamp(System.currentTimeMillis());
-        project.setCreateDate(time);
         return projectRepository.save(project);
     }
     
     @Override
     public  Optional<Project> findProject(long id) {
-
         return projectRepository.findById(id);
     }
 
@@ -45,7 +41,6 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Project updateProject(Project project) {
-        
        return projectRepository.save(project);
     }
 

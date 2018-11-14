@@ -1,31 +1,47 @@
 package com.kgisl.skylight.model;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
  * BaseEntity
  * @author Mohamed Asif J
  */
 @MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
 public  abstract class BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Column(name = "createdBy",updatable = false)
+    @Column(name = "createdBy",nullable = false,updatable = false)
+    @CreatedBy
     private String createUser;
 
-    @Column(name = "createdOn",updatable = false)
-    private Timestamp createDate;
+    @Column(name = "createdOn",nullable = false,updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreatedDate
+    private Date createDate;
 
     @Column(name = "updatedBy")
+    @LastModifiedBy
     private String updateUser;
 
     @Column(name = "updatedOn")
-    private Timestamp updateDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    @LastModifiedDate
+    private Date updateDate;
 
     /**
      * @return the createUser
@@ -42,13 +58,13 @@ public  abstract class BaseEntity implements Serializable {
     /**
      * @return the createDate
      */
-    public Timestamp getCreateDate() {
-        return createDate;
+    public Date getCreateDate() {
+        return createDate;  
     }
     /**
      * @param createDate the createDate to set
      */
-    public void setCreateDate(Timestamp createDate) {
+    public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
     /**
@@ -66,13 +82,13 @@ public  abstract class BaseEntity implements Serializable {
     /**
      * @return the updateDate
      */
-    public Timestamp getUpdateDate() {
+    public Date getUpdateDate() {
         return updateDate;
     }
     /**
      * @param updateDate the updateDate to set
      */
-    public void setUpdateDate(Timestamp updateDate) {
+    public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
     }
 }

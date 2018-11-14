@@ -46,19 +46,21 @@ public class ProjectController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteProject(@PathVariable long id) {
+
         projectService.deleteProject(id);
         return new ResponseEntity<>("Project has been deleted!",HttpStatus.OK);
     }
 
     @PostMapping("/create")
     public ResponseEntity<Project> createProject(@RequestBody Project project) {
-        Project createdproject = projectService.createProject(project);
 
+        Project createdproject = projectService.createProject(project);
         return new ResponseEntity<>(createdproject,HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<Project> updateProject(@RequestBody Project project) {
+        
         Project updateProject =  projectService.updateProject(project);
         return new ResponseEntity<>(updateProject,HttpStatus.OK);
     }
