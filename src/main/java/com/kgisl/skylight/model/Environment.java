@@ -26,44 +26,45 @@ public class Environment extends BaseEntity{
     @Column
     private String environmentName;
 
-
     /**
-     * @return the envId
+     * @return the environmentId
      */
-    public Long getEnvId() {
+    public Long getEnvironmentId() {
         return environmentId;
     }
     /**
-     * @param envId the envId to set
+     * @param environmentId the environmentId to set
      */
-    public void setEnvId(Long environmentId) {
+    public void setEnvironmentId(Long environmentId) {
         this.environmentId = environmentId;
     }
+
     /**
-     * @return the envCode
+     * @return the environmentCode
      */
-    public String getEnvCode() {
+    public String getEnvironmentCode() {
         return environmentCode;
     }
     /**
-     * @param envCode the envCode to set
+     * @param environmentCode the environmentCode to set
      */
-    public void setEnvCode(String environmentCode) {
+    public void setEnvironmentCode(String environmentCode) {
         this.environmentCode = environmentCode;
     }
+
     /**
-     * @return the envName
+     * @return the environmentName
      */
-    public String getEnvName() {
+    public String getEnvironmentName() {
         return environmentName;
     }
     /**
-     * @param envName the envName to set
+     * @param environmentName the environmentName to set
      */
-    public void setEnvName(String environmentName) {
+    public void setEnvironmentName(String environmentName) {
         this.environmentName = environmentName;
     }
-
+    
     @Override
     public String toString() {
         return super.toString();

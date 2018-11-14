@@ -29,6 +29,20 @@ public class Project extends BaseEntity {
     private String projectName;
 
     /**
+     * @return the projectId
+     */
+    public Long getProjectId() {
+        return projectId;
+    }
+
+    /**
+     * @param projectId the projectId to set
+     */
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
+    }
+
+    /**
      * @return the projectName
      */
     public String getProjectName() {
