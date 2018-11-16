@@ -12,8 +12,13 @@ import com.kgisl.skylight.model.Project;
 public interface ProjectService {
     
     public List<Project> findAllProject();
+
     public Project createProject(Project project);
-	public Optional<Project> findProject(long id);
+
+    public Optional<Project> findProject(long id);
+    
     public void deleteProject(long id);
+
     public Project updateProject(Project project);
+    
 }

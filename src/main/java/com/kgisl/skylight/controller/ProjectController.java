@@ -36,25 +36,18 @@ public class ProjectController {
     }
 
     @GetMapping("/find/{id}")
-    public ResponseEntity<Project> retrieveProject(@PathVariable long id) {
+    public ResponseEntity<?> retrieveProject(@PathVariable long id) {
 
         Optional<Project> findproject =  projectService.findProject(id);
         if(findproject.isPresent())
-            return new ResponseEntity<>(findproject.get(),HttpStatus.OK);
-        else return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteProject(@PathVariable long id) {
-
-        projectService.deleteProject(id);
-        return new ResponseEntity<>("Project has been deleted!",HttpStatus.OK);
+            return new ResponseEntity<Project>(findproject.get(),HttpStatus.OK);
+        else return new ResponseEntity<String>("Project Not Found",HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("/create")
     public ResponseEntity<Project> createProject(@RequestBody Project project) {
 
-        Project createdproject = projectService.createProject(project);
+        Project createdproject = projectService.createProject(project); 
         return new ResponseEntity<>(createdproject,HttpStatus.OK);
     }
 
@@ -64,5 +57,12 @@ public class ProjectController {
         project.setProjectId(id);
         Project updateProject =  projectService.updateProject(project);
         return new ResponseEntity<>(updateProject,HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteProject(@PathVariable long id) {
+
+        projectService.deleteProject(id);
+        return new ResponseEntity<>("Project has been deleted!",HttpStatus.OK);
     }
 }

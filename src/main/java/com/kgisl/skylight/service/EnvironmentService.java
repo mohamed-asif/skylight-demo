@@ -12,9 +12,14 @@ import com.kgisl.skylight.model.Environment;
 public interface EnvironmentService {
     
     public List<Environment> findAllEnvironment();
+
     public Environment createEnvironment(Environment environment);
-	public Optional<Environment> findEnvironment(long id);
+
+    public Optional<Environment> findEnvironment(long id);
+    
     public void deleteEnvironment(long id);
+
     public Environment updateEnvironment(Environment environment);
+    
 	//public List<Project> findByName(String name);
 }

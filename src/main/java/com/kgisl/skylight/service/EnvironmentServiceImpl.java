@@ -1,6 +1,5 @@
 package com.kgisl.skylight.service;
 
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,23 +21,25 @@ public class EnvironmentServiceImpl implements EnvironmentService {
 
     @Override
     public List<Environment> findAllEnvironment() {
+        
         return environmentRepository.findAll();
     }
 
     @Override
     public Environment createEnvironment(Environment environment) {
-        Timestamp time = new Timestamp(System.currentTimeMillis());
-        environment.setCreateDate(time);
+        
         return environmentRepository.save(environment);
     }
     
     @Override
     public Optional<Environment> findEnvironment(long id) {
+
         return environmentRepository.findById(id);
     }
 
     @Override
     public void deleteEnvironment(long id) {
+
         environmentRepository.deleteById(id);
     }
 

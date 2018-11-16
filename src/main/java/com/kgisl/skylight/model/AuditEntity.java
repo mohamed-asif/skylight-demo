@@ -1,13 +1,13 @@
 package com.kgisl.skylight.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -16,12 +16,13 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
- * BaseEntity
+ * AuditEntity
  * @author Mohamed Asif J
  */
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public  abstract class BaseEntity implements Serializable {
+@JsonIgnoreProperties(value={"createUser","createDate","updateUser","updateDate"})
+public  abstract class AuditEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -30,18 +31,28 @@ public  abstract class BaseEntity implements Serializable {
     private String createUser;
 
     @Column(name = "createdOn",nullable = false,updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
-    private Date createDate;
+    private LocalDateTime  createDate;
 
     @Column(name = "updatedBy")
     @LastModifiedBy
     private String updateUser;
 
     @Column(name = "updatedOn")
-    @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
-    private Date updateDate;
+    private LocalDateTime updateDate;
+
+   /* @PrePersist
+    public void prePersist() {
+        LocalDateTime now = LocalDateTime.now();
+        this.createDate = now;
+        this.updateDate = now;
+    }
+     
+    @PreUpdate
+    public void preUpdate() {
+        this.updateDate = LocalDateTime.now();
+    } */
 
     /**
      * @return the createUser
@@ -58,13 +69,13 @@ public  abstract class BaseEntity implements Serializable {
     /**
      * @return the createDate
      */
-    public Date getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;  
     }
     /**
      * @param createDate the createDate to set
      */
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
     /**
@@ -82,13 +93,13 @@ public  abstract class BaseEntity implements Serializable {
     /**
      * @return the updateDate
      */
-    public Date getUpdateDate() {
+    public LocalDateTime getUpdateDate() {
         return updateDate;
     }
     /**
      * @param updateDate the updateDate to set
      */
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(LocalDateTime updateDate) {
         this.updateDate = updateDate;
     }
 }

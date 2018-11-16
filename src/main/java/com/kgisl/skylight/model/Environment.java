@@ -12,13 +12,14 @@ import javax.persistence.SequenceGenerator;
  * @author Mohamed Asif J
  */
 @Entity(name="environment")
-public class Environment extends BaseEntity{
+public class Environment extends AuditEntity{
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO,generator = "envseqgenerator")
-    @SequenceGenerator(name = "envseqgenerator",sequenceName = "environmentseq")
+    // @GeneratedValue(strategy = GenerationType.AUTO,generator = "envseqgenerator")
+    // @SequenceGenerator(name = "envseqgenerator",sequenceName = "environmentseq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long environmentId;
 
     @Column
